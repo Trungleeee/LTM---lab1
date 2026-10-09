@@ -21,6 +21,9 @@ while True:
     cmd = input("Nhap lenh (ON/OFF) hoac EXIT de thoat: ").strip().upper()
     if cmd == "EXIT":
         break
+    if cmd not in ["ON", "OFF"]:
+        print(f"Loi: Lenh '{cmd}' khong hop le! Chi chap nhan 'ON' hoac 'OFF'.")
+        continue
     client.publish(topic_cmd, cmd)
     print(f"Da gui lenh {cmd} toi light01")
     time.sleep(1)

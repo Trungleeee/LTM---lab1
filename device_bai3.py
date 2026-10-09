@@ -6,6 +6,15 @@ port = 1883
 topic_cmd = "iot/lab/light01/cmd"
 topic_status = "iot/lab/light01/status"
 
+def on_connect(client, userdata, flags, rc=None, properties=None):
+    client.subscribe(topic_cmd)
+    init_payload = json.dumps({
+        "device_id": "light01",
+        "status": "OFF"
+    })
+    client.publish(topic_status, init_payload)
+    print(f"Da ket noi broker, gui trang thai mac dinh: {init_payload}")
+
 def on_message(client, userdata, msg):
     command = msg.payload.decode('utf-8').strip().upper()
     if command in ["ON", "OFF"]:
@@ -19,7 +28,7 @@ def on_message(client, userdata, msg):
         print(f"Lenh khong hop le: {command}")
 
 client = mqtt.Client()
+client.on_connect = on_connect
 client.on_message = on_message
 client.connect(broker, port)
-client.subscribe(topic_cmd)
 client.loop_forever()
