@@ -16,4 +16,5 @@ client = mqtt.Client()
 client.on_message = on_message
 client.connect(broker, port)
 client.subscribe(topic)
+print(f"Dang lang nghe topic: {topic}")
 client.loop_forever()
