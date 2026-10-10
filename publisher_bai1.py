@@ -8,7 +8,7 @@ topic = "iot/lab/message"
 client = mqtt.Client()
 client.connect(broker, port)
 
-ho_ten = "Lê Quỳnh Anh"
+ho_ten = "Le Quynh Anh"
 msv = "B23DCCN028"
 loi_chao = "Xin chao tu client Python MQTT"
 payload = f"{loi_chao} - {msv} - {ho_ten}"
